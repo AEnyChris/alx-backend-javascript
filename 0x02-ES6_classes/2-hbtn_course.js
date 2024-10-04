@@ -29,7 +29,7 @@ export default class HolbertonCourse {
     }
     if (!s.every((student) => typeof student === 'string')) {
       throw new TypeError('Students must be an array of strings');
-	}
+    }
     this._students = s;
   }
 
