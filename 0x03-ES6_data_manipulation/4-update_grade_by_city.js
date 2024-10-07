@@ -8,13 +8,11 @@ export default function updateStudentGradeByCity(getListStudents, city, newGrade
       .filter((obj) => obj.location === city)
       .map((o) => {
         for (const i of newGrades) {
-          if (o.id === i.studentId) {
-            o.grade = i.grade;
-          } else {
-            o.grade = 'N/A';
+          if (i.studentId === o.id) {
+            return { ...o, grade: i.grade };
           }
         }
-        return o;
+        return { ...o, grade: 'N/A' };
       });
     return resArray;
   }
