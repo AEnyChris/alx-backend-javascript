@@ -1,10 +1,9 @@
 export default function cleanset(set, startString) {
-  let resArr = '';
-  if (startString) {
-    resArr = [...set]
-      .filter((text) => text.startsWith(startString))
-      .map((text) => text.slice(startString.length))
-      .join('-');
+  if (!startString || !set || !(set instanceof Set) || !(typeof startString === 'string')) {
+    return '';
   }
-  return resArr;
+  return [...set]
+    .filter((text) => text.startsWith(startString) && (typeof text === 'string'))
+    .map((text) => text.slice(startString.length))
+    .join('-');
 }
