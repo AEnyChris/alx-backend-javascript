@@ -20,11 +20,10 @@ async function countStudents(path) {
     }
 
     console.log(`Number of students: ${fileLines.length - 1}`);
-    Object.entries(fieldsCount).forEach((ele) => console.log(`Number of students in ${ele[0]}: ${ele[1].count}. List: ${ele[1].firstNames.toString().replace(/,/g, ', ')}`))
+    Object.entries(fieldsCount).forEach((ele) => console.log(`Number of students in ${ele[0]}: ${ele[1].count}. List: ${ele[1].firstNames.toString().replace(/,/g, ', ')}`));
   } catch (err) {
     throw new Error('Cannot load the database');
   }
 }
 
 module.exports = countStudents;
-
