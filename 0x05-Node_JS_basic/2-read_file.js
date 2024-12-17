@@ -12,23 +12,22 @@ const countStudents = (path) => {
 
   // Read file and process each line to save count of each field
   // and corresponding first name of associated student into an object
-  const fileLines = fs.readFileSync(path).toString('utf-8').split('\n');
+  const fileLines = fs.readFileSync(path).toString('utf-8').trim().split('\n');
   const fieldsCount = {};
+
   for (const i of fileLines.slice(1)) {
-    if (!Object.keys(fieldsCount).includes(i.split(',').at(-1))) {
-      fieldsCount[i.split(',').at(-1)] = {};
-      fieldsCount[i.split(',').at(-1)][i.split(',').at(-1)] = 1;
-      fieldsCount[i.split(',').at(-1)].firstNames = new Array(i.split(',').at(0));
+    if (!Object.keys(fieldsCount).includes(i.split(',').slice(-1).toString())) {
+      fieldsCount[i.split(',').slice(-1).toString()] = {};
+      fieldsCount[i.split(',').slice(-1).toString()].count = 1;
+      fieldsCount[i.split(',').slice(-1).toString()].firstNames = new Array(i.split(',').slice(0, 1).toString());
     } else {
-      fieldsCount[i.split(',').at(-1)][i.split(',').at(-1)] += 1;
-      fieldsCount[i.split(',').at(-1)].firstNames.push(i.split(',').at(0));
+      fieldsCount[i.split(',').slice(-1).toString()].count += 1;
+      fieldsCount[i.split(',').slice(-1).toString()].firstNames.push(i.split(',').slice(0, 1).toString());
     }
-    // console.log(i.split(',').at(-1))
   }
+
   console.log(`Number of students: ${fileLines.length - 1}`);
-  Object.values(fieldsCount).forEach((field) => console.log(`Number of students in ${Object.keys(field)[0]}: ${field[Object.keys(field)[0]]}. List: ${field.firstNames.toString().replace(/,/g, ', ')}`));
-  // console.log(Object.keys(fieldsCount));
-  // console.log(fileLines);
+  Object.entries(fieldsCount).forEach((ele) => console.log(`Number of students in ${ele[0]}: ${ele[1].count}. List: ${ele[1].firstNames.toString().replace(/,/g, ', ')}`));
 };
 
 module.exports = countStudents;
