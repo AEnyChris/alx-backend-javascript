@@ -11,13 +11,13 @@ const countStudents = (path) => new Promise((res, rej) => {
       const fieldsCount = {};
 
       for (const i of fileLines.slice(1)) {
-        if (!Object.keys(fieldsCount).includes(i.split(',').at(-1))) {
-          fieldsCount[i.split(',').at(-1)] = {};
-          fieldsCount[i.split(',').at(-1)].count = 1;
-          fieldsCount[i.split(',').at(-1)].firstNames = new Array(i.split(',').at(0));
+        if (!Object.keys(fieldsCount).includes(i.split(',').slice(-1).toString())) {
+          fieldsCount[i.split(',').slice(-1).toString()] = {};
+          fieldsCount[i.split(',').slice(-1).toString()].count = 1;
+          fieldsCount[i.split(',').slice(-1).toString()].firstNames = new Array(i.split(',').slice(0, 1).toString());
         } else {
-          fieldsCount[i.split(',').at(-1)].count += 1;
-          fieldsCount[i.split(',').at(-1)].firstNames.push(i.split(',').at(0));
+          fieldsCount[i.split(',').slice(-1).toString()].count += 1;
+          fieldsCount[i.split(',').slice(-1).toString()].firstNames.push(i.split(',').slice(0, 1).toString());
         }
       }
 
@@ -29,5 +29,3 @@ const countStudents = (path) => new Promise((res, rej) => {
 });
 
 module.exports = countStudents;
-
-// countStudents('database.csv')
