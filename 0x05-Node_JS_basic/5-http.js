@@ -48,7 +48,7 @@ const app = createServer((req, res) => {
         res.write(`Number of students in ${ele[0]}: ${ele[1].count}. List: ${ele[1].firstNames.toString().replace(/,/g, ', ')}\n`);
       });
       res.end();
-    }).catch((error) => res.end(error));
+    }).catch((error) => res.end(error.message + '\n'));
     res.write('This is the list of our students\n');
   }
 });
