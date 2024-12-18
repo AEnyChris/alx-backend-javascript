@@ -1,11 +1,11 @@
 const { createServer } = require('http');
 const fs = require('fs');
-// const countStudents = require('./3-read_file_async.js');
 
 const hostname = '127.0.0.1';
 const port = 1245;
 const database = process.argv[2];
 
+// countStudents function to retrieve student data from database
 const countStudents = (path) => new Promise((res, rej) => {
   fs.readFile(path, { encoding: 'utf8' }, (err, data) => {
     if (err) {
@@ -32,11 +32,10 @@ const countStudents = (path) => new Promise((res, rej) => {
   });
 });
 
+// Create server and return response of student data
 const app = createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  //   res.statusCode = 200;
-  //   res.setHeader('Content-Type', 'text/plain');
-  // res.end('Hello Holberton School!');
+
   if (req.url === '/') {
     res.end('Hello Holberton School!');
   }
